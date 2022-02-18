@@ -5,7 +5,7 @@ roslaunch ur_robot_driver ur5e_bringup.launch robot_ip:=192.168.1.192 \
   kinematics_config:=$(rospack find ur_calibration)/etc/ur5e_calibration.yaml
 
 
-[ERROR] [1645177956.726449460]: Pipeline producer overflowed! <RTDE Data Pipeline>
+$$[ERROR] [1645177956.726449460]: Pipeline producer overflowed! <RTDE Data Pipeline>$$
 
 [ERROR] [1645178071.892217848]: This controller requires a hardware interface of type 'scaled_controllers::ScaledPositionJointInterface'. Make sure this is registered in the hardware_interface::RobotHW class.
 
