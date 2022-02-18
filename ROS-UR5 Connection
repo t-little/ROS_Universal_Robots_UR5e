@@ -1,0 +1,35 @@
+------------------Callibration for ROS-UR5 Connection--------------------------
+
+cd catkin_ws
+source devel/setup.bash
+
+roslaunch ur_calibration calibration_correction.launch \
+  robot_ip:=192.168.1.192 target_filename:="${HOME}/Desktop/catkin_ws/src/Universal_Robots_ROS_Driver/ur_calibration/etc/ur5e_calibration.yaml"
+
+
+roslaunch ur_robot_driver ur5e_bringup.launch robot_ip:=192.168.1.192
+
+----------------------Trial Method-----------
+roslaunch ur_robot_driver ur5e_bringup.launch robot_ip:=192.168.1.192 \
+  kinematics_config:=$(rospack find ur_calibration)/etc/ur5e_calibration.yaml
+  
+  
+  ---------Launch RViz-----------------
+  roscore
+  roslaunch ur5_moveit_config ur5_moveit_planning_execution.launch limited:=true
+  roslaunch ur5_moveit_config moveit_rviz.launch config:=true
+  
+  #NEED TO CONFIGURE SOMETHING OR PASS THE YAMI FILE TO RVIZ
+  
+ ---------Launch Gazebo---------------
+ roslaunch gazebo_ros empty_world.launch
+ 
+ (In a different terminal)
+ rosrun gazebo_ros spawn_model -file /$HOME/Desktop/ur5_gazebo.urdf -urdf -x 0 -y 0 -z 0.1 -model ur5 
+ 
+---------------Quick Start in RViz-------------------
+source ~/ws_moveit/devel/setup.bash
+roslaunch panda_moveit_config demo.launch rviz_tutorial:=true
+
+ 
+ 

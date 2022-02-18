@@ -1,0 +1,19 @@
+[rviz2-1] [ERROR] [1643592761.069969843] [moveit_ros_visualization.motion_planning_frame]: Action server: /recognize_objects not available
+
+[rviz2-1] [ERROR] [1643592761.474083202] [moveit_background_processing.background_processing]: Exception caught while processing action 'loadRobotModel': std::bad_alloc
+
+[ERROR] [mongo_wrapper_ros.py-6]: process has died [pid 5175, exit code -2, cmd '/home/thomas/ws_moveit2/install/warehouse_ros_mongo/lib/warehouse_ros_mongo/mongo_wrapper_ros.py --ros-args --params-file /tmp/launch_params_votudx0z --params-file /tmp/launch_params_p7p89sdz --params-file /tmp/launch_params_2ibkb48h'].
+
+--------------------------Setups----------------------------
+source /opt/ros/foxy/setup.bash
+source ~/ws_moveit2/install/setup.bash
+source $COLCON_WS/install/setup.bash
+
+---------------------------RViz-----------------------------
+ros2 launch moveit2_tutorials demo.launch.py rviz_tutorial:=true
+
+
+
+---------------------------UR5e Setup-----------------------
+ros2 launch ur_bringup ur_control.launch.py ur_type:=ur5e robot_ip:=192.168.1.192 launch_rviz:=true
+

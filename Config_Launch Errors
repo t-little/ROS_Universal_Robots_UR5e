@@ -1,0 +1,30 @@
+Launch/Config Errors
+
+------------------------------------Creating the Error--------------------------------
+After usual setup
+thomas@thomas-VirtualBox:~/ros_lib_ws$ source devel/setup.bash
+
+thomas@thomas-VirtualBox:~/ros_lib_ws/src/Universal_Robots_ROS_Driver$ roslaunch ur_robot_driver ur5e_bringup.launch robot_ip:=192.168.1.192
+
+-----------------------------------------------------------------------------------------
+[ERROR] [1644935986.672012986]: The calibration parameters of the connected robot don't match the ones from the given kinematics config file. Please be aware that this can lead to critical inaccuracies of tcp positions. Use the ur_calibration tool to extract the correct calibration from the robot and pass that into the description. See [TODO Link to documentation] for details.
+
+[ERROR] [1644935989.673624834]: Pipeline producer overflowed! <RTDE Data Pipeline>
+
+[ WARN] [1644935987.374314161]: No realtime capabilities found. Consider using a realtime system for better performance
+
+[ERROR] [1644935990.501786270]: This controller requires a hardware interface of type 'scaled_controllers::ScaledPositionJointInterface'. Make sure this is registered in the hardware_interface::RobotHW class.
+
+[ERROR] [1644935990.515398878]: Initializing controller 'scaled_pos_traj_controller' failed
+
+---------------------------Potential Solutions-------------------------------------------
+try calibrating first and then passing the argument as shown by example here
+thomas@thomas-VirtualBox:~/ros_lib_ws$ source devel/setup.bash
+
+$ roslaunch ur_calibration calibration_correction.launch \
+  robot_ip:=192.168.1.192 target_filename:="${HOME}/ros_lib_ws/src/Universal_Robots_ROS_Driver/ur_calibration/etc/ur5e_calibration.yaml"
+
+$ roslaunch ur_robot_driver ur5e_bringup.launch robot_ip:=192.168.1.192 \
+  kinematics_config:=$(rospack find ur_calibration)/etc/ur5e_calibration.yaml
+  
+  FIXED ONE OF THE ERRORS
